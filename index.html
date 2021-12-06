@@ -3,21 +3,175 @@
     <head>
         <title>Clock</title>
         <meta charset="utf-8">
+        <script>
+            body{
+                background-image: linear-gradient(to right, limegreen,lime,cyan,darkcyan);  
+            }  
+
+            #main{
+                background-color:rgba( 2, 212, 75, 0.902 );
+                width: 300px;
+                height: 275px;
+                font-family: sans-serif;
+                font-weight: bold;
+                border: dotted 3px rgba( 7, 7, 7, 0.9 );
+                border-radius:15px 50px;
+                margin: 100px;
+                padding: 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -150px;
+                margin-left: -150px;
+                object-position: center;
+                align-self: center;   
+            }
+
+            #el0{
+                position: relative;
+                text-align: center;
+
+            }
+
+            #el1{
+                position: relative;
+                text-align: center;
+            }
+
+            #el2{
+                position: relative;
+                text-align: center;
+            }
+
+            #el{
+                position: relative;
+                text-align: center;
+            }
+        </script>
     </head>
     <body>
+        <div id="main">
+            <p id="el"></p><br>
+            <p id="el0"></p><br>
+            <p id="el1"></p><br>
+            <p id="el2"></p>
+        </div>
         <script>
-            setInterval(() => {
+            //Defining needed variables
+            var el=document.getElementById("el");
+            var el0=document.getElementById("el0");        
+            var el1=document.getElementById("el1");
+            var el2=document.getElementById("el2");
+            var info = document.getElementById("main");
+            var W = document.getElementById("el-1");      
+            var month2;
+            var day2;
+            var WOW;    
+
+            //Making function to print time constantly     
+            function printTime() {
                 var d = new Date();
-                var year = d.getFullYear();
+                var year = d.getFullYear(); 
                 var day = d.getDate();
-                var month = d.getMonth() + 1;
                 var hours = d.getHours();
                 var mins = d.getMinutes();
                 var secs = d.getSeconds();
-                var milisecs = d.getMilliseconds();
-                
-                document.body.innerHTML = day + ":" + month + ":" + year + ":" + hours + ":" + mins + ":" + secs + ":" + milisecs;
-            }, 1);
+                var milisecs = d.getMilliseconds();       
+
+                //Making the inner HTML 
+                el.innerHTML ="Day of the week: "+day2;
+                el1.innerHTML ="Date: "+ day+" Month: "+month2+" Year: "+year;
+                el2.innerHTML ="Hour: "+ hours+" "+" Minute: "+mins+" Seconds: "+secs+" Miliseconds: "+milisecs;        
+            }   
+
+            //Month deciding 
+            switch(new Date().getMonth()){
+                   case 0:
+                       month2="Jan ";
+                       break;
+                   case 1:
+                       month2="Feb ";
+                       break;
+                   case 2:
+                       month2="Mar ";
+                       break;
+                   case 3:
+                       month2="Apr ";
+                       break; 
+                   case 4:
+                       month2="May ";
+                       break; 
+                   case 5:
+                       month2="June ";
+                       break;
+                   case 6:
+                       month2="July ";
+                       break;
+                   case 7:
+                       month2="Aug ";
+                       break;
+                   case 8:
+                       month2="Sep ";
+                       break;       
+                   case 9:
+                       month2="Oct ";
+                       break;  
+                   case 10:
+                       month2="Nov ";
+                       break;
+                   case 11:
+                       month2="Dec ";
+                       break;       
+            }
+            //Week day and WOW deciding
+            switch(new Date().getDay()){
+                case 1:
+                    day2="Monday";
+                    WOW="Work day";   
+                    break;
+                case 2:
+                    day2="Tuesday";
+                        WOW="Work day";
+                    break;
+                case 3:
+                    day2="Wednesday";
+                    WOW="Work day";
+                    break;
+                case 4:
+                    day2="Thursday";
+                    WOW="Work day";
+                    break; 
+                case 5:
+                    day2="Friday";
+                    WOW="Work day";
+                    break; 
+                case 6:
+                    day2="Saturday";
+                    WOW="Weekend";
+                    break;
+                case 0:
+                    day2="Sunday";
+                    WOW="Weekend";
+                    break; 
+            }
+
+            //Choosing color for WOW(Work day Or Weekend)
+            switch(WOW){
+                case "Work day":
+                    el0.innerHTML="!!! "+WOW+" !!!";
+                    el0.style.color="red"; 
+                    el0.style.fontFamily="monospace";   
+                    el0.style.fontSize="20px";    
+                    break;
+                case "Weekend":
+                    el0.style.fontSize="20px";
+                    el0.style.color="#b70046";
+                    el0.innerHTML=WOW;    
+                    break;   
+            }
+
+            //Setting update time for function
+            setInterval(printTime, 1);
         </script>
 
     </body>
